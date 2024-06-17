@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de juguetes</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+
+    <h1 class="text-center mb-4">Tienda de Juguetes</h1>
+    
+    <form>
+        <div class="form-group row">
+            <label for="monopolio" class="col-sm-2 col-form-label">Monopolio</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="monopolio" placeholder="Cantidad">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ajedrez" class="col-sm-2 col-form-label">Ajedrez</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="ajedrez" placeholder="Cantidad">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lego" class="col-sm-2 col-form-label">Lego</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="lego" placeholder="Cantidad">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="dama" class="col-sm-2 col-form-label">Dama</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="dama" placeholder="Cantidad">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="laberinto" class="col-sm-2 col-form-label">Laberinto</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="laberinto" placeholder="Cantidad">
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="button" class="btn btn-primary" onclick="calculateTotal()">Calcular</button>
+        </div>
+    </form>
+   <div class="card mt-5">
+        <div class="card-header">
+            Resultados
+        </div>
+        <div class="card-body">
+            <p id="importeCompra" class="card-text"></p>
+            <p id="importeDescuento" class="card-text"></p>
+            <p id="importePagar" class="card-text"></p>
+        </div>
+    </div>
+<script TYPE="TEXT/JAVASCRIPT">
+     function calculateTotal() {
+        const priceMonopolio = 70.99;
+        const priceAjedrez = 78.99;
+        const priceLego = 100.99;
+        const priceDama = 58.50;
+        const priceLaberinto = 35.00;
+  
+        let cantidadMonopolio = parseInt(document.getElementById('monopolio').value) || 0;
+                let cantidadAjedrez = parseInt(document.getElementById('ajedrez').value) || 0;
+                let cantidadLego = parseInt(document.getElementById('lego').value) || 0;
+                let cantidadDama = parseInt(document.getElementById('dama').value) || 0;
+                let cantidadLaberinto = parseInt(document.getElementById('laberinto').value) || 0;
+
+        let subTotal = (cantidadMonopolio * priceMonopolio) + (cantidadAjedrez * priceAjedrez) + (cantidadLego * priceLego) + (cantidadDama * priceDama) + (cantidadLaberinto * priceLaberinto);
+    
+        let sumaCantidades = cantidadMonopolio+cantidadAjedrez+cantidadLego+cantidadDama+cantidadLaberinto
+    
+        let descuento = 0;
+        if (sumaCantidades > 0 && sumaCantidades < 10) {
+                    descuento = 3.5;
+                } else if (sumaCantidades >= 10 && sumaCantidades <= 20) {
+                    descuento = 7.0;
+                } else if (sumaCantidades > 20) {
+            descuento = 9.5;
+        }
+        let importeDescuento = subTotal * descuento;
+        let total = subTotal - importeDescuento;
+
+        document.getElementById('importeCompra').innerText = `Importe de Compra: S/. ${subTotal.toFixed(2)}`;
+                document.getElementById('importeDescuento').innerText = `Importe de Descuento: S/. ${importeDescuento.toFixed(2)} (${(descuento * 100).toFixed(1)}%)`;
+                document.getElementById('importePagar').innerText = `Importe a Pagar: S/. ${total.toFixed(2)}`;
+    }           
+</script>
+</html>
